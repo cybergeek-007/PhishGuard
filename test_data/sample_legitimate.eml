@@ -1,0 +1,30 @@
+Message-ID: <legit-sample-456@google.com>
+Date: Fri, 07 Feb 2026 10:15:30 +0000
+From: Google Team <no-reply@google.com>
+To: user@company.com
+Subject: Your Google Account Security Update
+Return-Path: <no-reply@google.com>
+Received: from mail-pg1-f41.google.com (mail-pg1-f41.google.com [142.250.1.41])
+    by mx.company.com with ESMTPS id def456
+    for <user@company.com>; Fri, 07 Feb 2026 10:15:30 +0000
+Received: from localhost (localhost [127.0.0.1])
+    by mail-pg1-f41.google.com with ESMTPS id abc123;
+    Fri, 07 Feb 2026 10:15:28 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+    d=google.com; s=20210112;
+Authentication-Results: mx.company.com;
+    spf=pass smtp.mailfrom=google.com;
+    dkim=pass header.d=google.com;
+    dmarc=pass (p=REJECT) header.from=google.com
+Content-Type: text/html; charset="utf-8"
+
+<html>
+<body>
+<h1>Google Account Security</h1>
+<p>Hello,</p>
+<p>We wanted to let you know about a recent security update to your Google Account.</p>
+<p><a href="https://myaccount.google.com/security">Review your security settings</a></p>
+<p>If you didn't make this change, please <a href="https://support.google.com/accounts">contact support</a>.</p>
+<p>Best regards,<br>The Google Team</p>
+</body>
+</html>

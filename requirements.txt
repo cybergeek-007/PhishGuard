@@ -1,0 +1,21 @@
+# Core Libraries
+python-dotenv==1.0.1
+dnspython==2.4.2
+requests==2.31.0
+beautifulsoup4==4.12.2
+python-whois==0.8.0
+streamlit==1.40.0
+pandas==2.2.3
+tldextract==5.1.0
+
+# Optional — only needed for IMAP live-fetch (not used in dashboard)
+# imaplib2==3.6
+# google-api-python-client==2.100.0
+# google-auth-httplib2==0.1.1
+# google-auth-oauthlib==1.0.0
+# dkimpy==1.1.5
+# pyspf==2.0.14
+# PyJWT==2.8.0
+# cryptography==41.0.7
+fpdf2==2.7.6
+aiohttp==3.9.1

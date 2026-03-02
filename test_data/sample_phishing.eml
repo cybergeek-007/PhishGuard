@@ -1,0 +1,30 @@
+Message-ID: <phish-sample-123@evil.com>
+Date: Fri, 07 Feb 2026 14:22:58 +0000
+From: PayPal Security <security@paypa1-verify.com>
+To: victim@company.com
+Subject: Urgent: Your Account Has Been Suspended
+Return-Path: <bounce@evil-server.ru>
+Received: from mail.evil-server.ru (unknown [45.33.22.11])
+    by mx.google.com with ESMTP id abc123
+    for <victim@company.com>; Fri, 07 Feb 2026 14:22:58 +0000
+Received: from localhost (localhost [127.0.0.1])
+    by mail.evil-server.ru with ESMTPS id xyz789;
+    Fri, 07 Feb 2026 14:22:55 +0000
+DKIM-Signature: v=1; a=rsa-sha256; d=paypa1-verify.com; s=default;
+Authentication-Results: mx.google.com;
+    spf=fail smtp.mailfrom=evil-server.ru;
+    dkim=none;
+    dmarc=fail (p=REJECT) header.from=paypa1-verify.com
+Content-Type: text/html; charset="utf-8"
+
+<html>
+<body>
+<h1>PayPal Security Alert</h1>
+<p>Dear Customer,</p>
+<p>We detected unusual activity on your account. Your account has been <b>suspended</b>.</p>
+<p><a href="http://paypa1-verify.com/login">Click here immediately to verify your account</a></p>
+<p>You must act within 24 hours or your account will be permanently closed.</p>
+<p>Visible text: https://www.paypal.com/signin<br>
+Actual link: http://paypa1-verify.com/login</p>
+</body>
+</html>
