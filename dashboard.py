@@ -55,7 +55,7 @@ st.markdown("""
         background-color: #080d08 !important;
         border-right: 1px solid #0f1f0f !important;
     }
-    [data-testid="stSidebar"] * { color: #c9d1d9; }
+    [data-testid="stSidebar"] * { color: #8d8d8d; }
 
     /* ══════════════════════════════════════════════════════════
        TYPOGRAPHY
