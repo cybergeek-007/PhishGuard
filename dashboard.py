@@ -34,28 +34,32 @@ st.markdown("""
 
     * { font-family: 'Inter', sans-serif; }
 
-    /* ── Force dark background everywhere ────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       FORCE DARK BACKGROUND EVERYWHERE
+       ══════════════════════════════════════════════════════════ */
     .stApp,
     .main,
+    .main .block-container,
     section[data-testid="stAppViewContainer"],
     [data-testid="stAppViewContainer"],
-    header[data-testid="stHeader"] {
+    header[data-testid="stHeader"],
+    [data-testid="stBottomBlockContainer"],
+    footer {
         background-color: #050a05 !important;
         color: #c9d1d9 !important;
     }
 
-    [data-testid="stSidebar"] {
+    /* ── Sidebar ─────────────────────────────────────────── */
+    [data-testid="stSidebar"],
+    [data-testid="stSidebar"] > div {
         background-color: #080d08 !important;
         border-right: 1px solid #0f1f0f !important;
     }
-
     [data-testid="stSidebar"] * { color: #c9d1d9; }
 
-    [data-testid="stBottomBlockContainer"] {
-        background-color: #050a05 !important;
-    }
-
-    /* ── Typography ──────────────────────────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       TYPOGRAPHY
+       ══════════════════════════════════════════════════════════ */
     .main-header {
         font-size: 2.8rem;
         font-weight: 700;
@@ -66,20 +70,319 @@ st.markdown("""
         margin-bottom: 0.3rem;
         letter-spacing: -0.02em;
     }
-
     .subheader {
         font-size: 1.05rem;
-        color: #3d6b3d;
+        color: #58a558;
         font-weight: 400;
         letter-spacing: 0.03em;
     }
 
-    /* ── Threat level colors ─────────────────────────────── */
-    .threat-high   { color: #f85149; font-weight: 700; }
-    .threat-medium { color: #d29922; font-weight: 700; }
-    .threat-low    { color: #00ff41; font-weight: 700; }
+    /* General text — make sure all p, span, label, div text is readable */
+    p, span, label, li { color: #c9d1d9; }
+    strong, b { color: #e6edf3; }
+    h1, h2, h3, h4, h5, h6 { color: #e6edf3 !important; }
 
-    /* ── Metric card ─────────────────────────────────────── */
+    /* ── Captions ─────────────────────────────────────────── */
+    .stCaption, [data-testid="stCaptionContainer"],
+    [data-testid="stCaptionContainer"] * {
+        color: #8b949e !important;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       STREAMLIT ALERT BOXES (st.info, st.success, st.warning, st.error)
+       — the #1 visibility problem on dark themes
+       ══════════════════════════════════════════════════════════ */
+    /* Base: all alerts */
+    [data-testid="stAlert"],
+    [data-testid="stNotification"],
+    .stAlert {
+        border-radius: 10px !important;
+        color: #c9d1d9 !important;
+    }
+    [data-testid="stAlert"] p,
+    [data-testid="stAlert"] span,
+    [data-testid="stNotification"] p,
+    [data-testid="stNotification"] span {
+        color: #c9d1d9 !important;
+    }
+
+    /* st.info — dark blue-green */
+    [data-testid="stAlert"][data-baseweb*="info"],
+    div[role="alert"]:has(> div > svg[data-testid="stIconMaterial"]) {
+        background-color: #0d1a1a !important;
+        border: 1px solid #1b3b3b !important;
+    }
+
+    /* Override ALL alert variants by kind attribute & color */
+    .element-container [data-testid="stAlert"] {
+        background-color: #0d1117 !important;
+        border: 1px solid #1b2b1b !important;
+    }
+
+    /* st.success */
+    .stSuccess, div[data-testid="stAlert"]:has(svg[fill="#09AB3B"]),
+    div[data-testid="stAlert"]:has(svg[title="success"]) {
+        background-color: #061a06 !important;
+        border: 1px solid #0f3b0f !important;
+    }
+    .stSuccess p, .stSuccess span { color: #7ee87e !important; }
+
+    /* st.warning */
+    .stWarning, div[data-testid="stAlert"]:has(svg[fill="#FACA2B"]),
+    div[data-testid="stAlert"]:has(svg[title="warning"]) {
+        background-color: #1a1406 !important;
+        border: 1px solid #3b2f0f !important;
+    }
+    .stWarning p, .stWarning span { color: #f0d060 !important; }
+
+    /* st.error */
+    .stError, div[data-testid="stAlert"]:has(svg[fill="#FF4B4B"]),
+    div[data-testid="stAlert"]:has(svg[title="error"]) {
+        background-color: #1a0606 !important;
+        border: 1px solid #3b0f0f !important;
+    }
+    .stError p, .stError span { color: #f88 !important; }
+
+    /* ══════════════════════════════════════════════════════════
+       DATAFRAME / TABLE — force dark
+       ══════════════════════════════════════════════════════════ */
+    .stDataFrame { border-radius: 12px; overflow: hidden; }
+
+    /* Glide data grid (Streamlit's default table renderer) */
+    [data-testid="stDataFrame"] canvas + div,
+    [data-testid="stDataFrame"] [role="grid"],
+    [data-testid="stDataFrame"],
+    .dvn-scroller,
+    .glideDataEditor {
+        background-color: #0d1117 !important;
+    }
+
+    /* Fallback: if rendered as HTML table */
+    .stDataFrame table,
+    .stDataFrame thead,
+    .stDataFrame tbody,
+    .stDataFrame th,
+    .stDataFrame td {
+        background-color: #0d1117 !important;
+        color: #c9d1d9 !important;
+        border-color: #1b2b1b !important;
+    }
+    .stDataFrame th {
+        background-color: #111b11 !important;
+        color: #58a558 !important;
+        font-weight: 600;
+    }
+    .stDataFrame tr:hover td {
+        background-color: #0f1f0f !important;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       CODE BLOCKS (st.code)
+       ══════════════════════════════════════════════════════════ */
+    code, pre, .stCodeBlock,
+    [data-testid="stCode"],
+    .stCode pre, .stCode code {
+        font-family: 'JetBrains Mono', monospace !important;
+        color: #00ff41 !important;
+        background-color: #0d1117 !important;
+        border: 1px solid #1b2b1b;
+        border-radius: 8px;
+    }
+    /* Copy button inside code blocks */
+    [data-testid="stCode"] button {
+        color: #8b949e !important;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       PROGRESS BAR
+       ══════════════════════════════════════════════════════════ */
+    .stProgress > div > div { border-radius: 10px; }
+    .stProgress > div > div > div { border-radius: 10px; }
+
+    /* Progress bar text ("Risk Level: 75%") */
+    .stProgress p, .stProgress span,
+    [data-testid="stProgressBarText"],
+    .stProgress [data-testid="stMarkdownContainer"] p {
+        color: #c9d1d9 !important;
+        font-weight: 500;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       INPUTS — text input, text area, file uploader, radio, selectbox
+       ══════════════════════════════════════════════════════════ */
+    /* Text input / text area */
+    .stTextInput > div > div > input,
+    .stTextArea > div > div > textarea,
+    .stTextInput input,
+    .stTextArea textarea {
+        background-color: #0d1117 !important;
+        border: 1px solid #1b2b1b !important;
+        color: #c9d1d9 !important;
+        border-radius: 10px !important;
+    }
+    .stTextInput > div > div > input:focus,
+    .stTextArea > div > div > textarea:focus {
+        border-color: #00ff4140 !important;
+        box-shadow: 0 0 10px rgba(0,255,65,0.08) !important;
+    }
+    .stTextInput label, .stTextArea label {
+        color: #8b949e !important;
+    }
+
+    /* File uploader */
+    [data-testid="stFileUploader"],
+    [data-testid="stFileUploader"] > div,
+    [data-testid="stFileUploader"] section,
+    [data-testid="stFileUploader"] section > div,
+    [data-testid="stFileDropzoneInstructions"] {
+        background-color: #0d1117 !important;
+        border-color: #1b2b1b !important;
+        color: #8b949e !important;
+    }
+    [data-testid="stFileUploader"] section {
+        border: 1px dashed #1b3b1b !important;
+        border-radius: 10px !important;
+    }
+    [data-testid="stFileUploader"] small,
+    [data-testid="stFileUploader"] span,
+    [data-testid="stFileUploader"] p,
+    [data-testid="stFileDropzoneInstructions"] span,
+    [data-testid="stFileDropzoneInstructions"] div {
+        color: #8b949e !important;
+    }
+    /* Uploaded file info chip */
+    [data-testid="stFileUploaderFile"],
+    [data-testid="stFileUploaderFile"] > div {
+        background-color: #111b11 !important;
+        border: 1px solid #1b2b1b !important;
+        border-radius: 8px !important;
+    }
+    [data-testid="stFileUploaderFile"] span,
+    [data-testid="stFileUploaderFile"] small {
+        color: #c9d1d9 !important;
+    }
+    [data-testid="stFileUploaderFile"] button {
+        color: #8b949e !important;
+    }
+
+    /* Radio buttons */
+    .stRadio > div { color: #c9d1d9 !important; }
+    .stRadio label { color: #c9d1d9 !important; }
+    .stRadio label span { color: #c9d1d9 !important; }
+    .stRadio [role="radiogroup"] label {
+        background-color: transparent !important;
+    }
+
+    /* Selectbox / Multiselect */
+    [data-baseweb="select"] > div,
+    [data-baseweb="select"] input {
+        background-color: #0d1117 !important;
+        border-color: #1b2b1b !important;
+        color: #c9d1d9 !important;
+    }
+    [data-baseweb="popover"],
+    [data-baseweb="menu"],
+    [data-baseweb="menu"] li {
+        background-color: #0d1117 !important;
+        color: #c9d1d9 !important;
+    }
+    [data-baseweb="menu"] li:hover {
+        background-color: #0f1f0f !important;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       BUTTONS
+       ══════════════════════════════════════════════════════════ */
+    .stButton > button {
+        border-radius: 10px !important;
+        font-weight: 600 !important;
+        border: 1px solid #1b2b1b !important;
+        background-color: #0d1117 !important;
+        color: #c9d1d9 !important;
+        transition: all 0.3s ease !important;
+    }
+    .stButton > button:hover {
+        border-color: #00ff4150 !important;
+        box-shadow: 0 0 20px rgba(0,255,65,0.1) !important;
+        color: #00ff41 !important;
+    }
+    .stButton > button[kind="primary"],
+    .stButton > button[data-testid="stBaseButton-primary"] {
+        background: linear-gradient(135deg, #00cc33 0%, #009922 100%) !important;
+        color: #000 !important;
+        border: none !important;
+        font-weight: 700 !important;
+    }
+    .stButton > button[kind="primary"]:hover,
+    .stButton > button[data-testid="stBaseButton-primary"]:hover {
+        box-shadow: 0 0 30px rgba(0,255,65,0.25) !important;
+    }
+
+    /* Download button */
+    .stDownloadButton > button {
+        background: #0d1117 !important;
+        color: #00ff41 !important;
+        border: 1px solid #1b2b1b !important;
+        border-radius: 10px !important;
+    }
+    .stDownloadButton > button:hover {
+        border-color: #00ff4150 !important;
+        box-shadow: 0 0 20px rgba(0,255,65,0.1) !important;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       SPINNER
+       ══════════════════════════════════════════════════════════ */
+    [data-testid="stSpinner"] > div,
+    .stSpinner > div {
+        color: #00ff41 !important;
+    }
+    [data-testid="stSpinner"] p {
+        color: #c9d1d9 !important;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       DIVIDERS & SEPARATORS
+       ══════════════════════════════════════════════════════════ */
+    hr, [data-testid="stDivider"] {
+        border-color: #1b2b1b !important;
+        opacity: 0.6;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       TABS
+       ══════════════════════════════════════════════════════════ */
+    .stTabs [data-baseweb="tab-list"] { gap: 8px; }
+    .stTabs [data-baseweb="tab"] { color: #8b949e; border-radius: 8px; }
+    .stTabs [data-baseweb="tab"]:hover { color: #00ff41; }
+    .stTabs [data-baseweb="tab"][aria-selected="true"] { color: #00ff41 !important; }
+
+    /* ══════════════════════════════════════════════════════════
+       EXPANDER
+       ══════════════════════════════════════════════════════════ */
+    .streamlit-expanderHeader,
+    [data-testid="stExpander"] summary,
+    [data-testid="stExpander"] summary span {
+        color: #c9d1d9 !important;
+    }
+    [data-testid="stExpander"] {
+        background-color: #0d1117 !important;
+        border: 1px solid #1b2b1b !important;
+        border-radius: 10px !important;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       TOOLTIP / POPOVER
+       ══════════════════════════════════════════════════════════ */
+    [data-baseweb="tooltip"] > div {
+        background-color: #161b22 !important;
+        color: #c9d1d9 !important;
+        border: 1px solid #1b2b1b !important;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       METRIC CARD
+       ══════════════════════════════════════════════════════════ */
     .metric-card {
         background: linear-gradient(160deg, #0d1117 0%, #080d08 100%);
         border-radius: 16px;
@@ -95,7 +398,7 @@ st.markdown("""
         border-color: rgba(0, 255, 65, 0.2);
     }
     .metric-card h4 {
-        color: #3d6b3d;
+        color: #58a558;
         font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 0.12em;
@@ -104,7 +407,16 @@ st.markdown("""
     }
     .metric-card p, .metric-card span { color: #c9d1d9; }
 
-    /* ── Score circle ────────────────────────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       THREAT LEVEL COLORS
+       ══════════════════════════════════════════════════════════ */
+    .threat-high   { color: #f85149; font-weight: 700; }
+    .threat-medium { color: #d29922; font-weight: 700; }
+    .threat-low    { color: #00ff41; font-weight: 700; }
+
+    /* ══════════════════════════════════════════════════════════
+       SCORE CIRCLE
+       ══════════════════════════════════════════════════════════ */
     .score-circle {
         width: 130px; height: 130px;
         border-radius: 50%;
@@ -129,7 +441,9 @@ st.markdown("""
         box-shadow: 0 0 40px rgba(0, 255, 65, 0.15), inset 0 0 20px rgba(0, 255, 65, 0.05);
     }
 
-    /* ── Feature card (welcome page) ─────────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       FEATURE CARD (Welcome page)
+       ══════════════════════════════════════════════════════════ */
     .feature-card {
         background: #0d1117;
         border-radius: 14px;
@@ -142,17 +456,19 @@ st.markdown("""
         box-shadow: 0 0 30px rgba(0, 255, 65, 0.06);
         border-color: rgba(0, 255, 65, 0.25);
     }
-    .feature-card h4 { color: #c9d1d9; margin-bottom: 8px; font-size: 1.05rem; }
+    .feature-card h4 { color: #e6edf3; margin-bottom: 8px; font-size: 1.05rem; }
     .feature-card p  { color: #8b949e; font-size: 0.9rem; line-height: 1.6; margin: 0; }
     .feature-num {
         font-family: 'JetBrains Mono', monospace;
-        color: #1b4b1b;
+        color: #3d8b3d;
         font-size: 0.75rem;
         letter-spacing: 0.1em;
         margin-bottom: 10px;
     }
 
-    /* ── Auth badges ─────────────────────────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       AUTH BADGES
+       ══════════════════════════════════════════════════════════ */
     .auth-pass {
         background: linear-gradient(135deg, #061a06 0%, #0a220a 100%);
         color: #00ff41; padding: 14px 16px; border-radius: 12px;
@@ -169,17 +485,21 @@ st.markdown("""
         font-weight: 600; text-align: center; border: 1px solid #30363d;
     }
 
-    /* ── Threat badges ───────────────────────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       THREAT BADGES
+       ══════════════════════════════════════════════════════════ */
     .threat-badge {
         display: inline-block; padding: 6px 16px; border-radius: 20px;
         font-size: 0.85rem; font-weight: 600;
         font-family: 'JetBrains Mono', monospace;
     }
-    .badge-high   { background: #f8514912; color: #f85149; border: 1px solid #f8514930; }
-    .badge-medium { background: #d2992212; color: #d29922; border: 1px solid #d2992230; }
-    .badge-low    { background: #00ff4112; color: #00ff41; border: 1px solid #00ff4130; }
+    .badge-high   { background: #f8514918; color: #f85149; border: 1px solid #f8514940; }
+    .badge-medium { background: #d2992218; color: #d29922; border: 1px solid #d2992240; }
+    .badge-low    { background: #00ff4118; color: #00ff41; border: 1px solid #00ff4140; }
 
-    /* ── Sidebar sections ────────────────────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       SIDEBAR SECTIONS
+       ══════════════════════════════════════════════════════════ */
     .sidebar-section {
         background: #0d1117;
         border-radius: 12px;
@@ -188,20 +508,24 @@ st.markdown("""
         border: 1px solid #1b2b1b;
     }
 
-    /* ── History items ────────────────────────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       HISTORY ITEMS
+       ══════════════════════════════════════════════════════════ */
     .history-item {
         background: #0a0f0a; border-radius: 8px;
         padding: 10px 14px; margin-bottom: 8px;
         border-left: 4px solid #1b2b1b;
         font-size: 0.88rem; color: #8b949e;
     }
-    .history-item strong { color: #c9d1d9; }
-    .history-item small  { color: #3d6b3d; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; }
+    .history-item strong { color: #e6edf3; }
+    .history-item small  { color: #58a558; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; }
     .history-high   { border-left-color: #f85149; }
     .history-medium { border-left-color: #d29922; }
     .history-low    { border-left-color: #00ff41; }
 
-    /* ── Welcome hero ────────────────────────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       WELCOME HERO
+       ══════════════════════════════════════════════════════════ */
     .welcome-hero {
         background: linear-gradient(160deg, #0d1117 0%, #081408 40%, #0d1117 100%);
         padding: 55px 40px; border-radius: 20px;
@@ -216,80 +540,18 @@ st.markdown("""
         pointer-events: none;
     }
     .welcome-hero h1 {
-        color: #00ff41; font-size: 2.6rem;
+        color: #00ff41 !important; font-size: 2.6rem;
         margin-bottom: 12px; position: relative;
         text-shadow: 0 0 40px rgba(0,255,65,0.15);
     }
     .welcome-hero p {
-        color: #3d6b3d; font-size: 1.1rem;
+        color: #58a558; font-size: 1.1rem;
         position: relative; max-width: 600px; margin: 0 auto;
     }
 
-    /* ── Buttons ──────────────────────────────────────────── */
-    .stButton > button {
-        border-radius: 10px !important;
-        font-weight: 600 !important;
-        border: 1px solid #1b2b1b !important;
-        transition: all 0.3s ease !important;
-    }
-    .stButton > button:hover {
-        border-color: #00ff4150 !important;
-        box-shadow: 0 0 20px rgba(0,255,65,0.1) !important;
-    }
-    .stButton > button[kind="primary"] {
-        background: linear-gradient(135deg, #00cc33 0%, #009922 100%) !important;
-        color: #000 !important;
-        border: none !important;
-        font-weight: 700 !important;
-    }
-    .stButton > button[kind="primary"]:hover {
-        box-shadow: 0 0 30px rgba(0,255,65,0.25) !important;
-    }
-
-    /* ── Inputs ───────────────────────────────────────────── */
-    .stTextInput > div > div > input,
-    .stTextArea > div > div > textarea {
-        background-color: #0d1117 !important;
-        border: 1px solid #1b2b1b !important;
-        color: #c9d1d9 !important;
-        border-radius: 10px !important;
-    }
-    .stTextInput > div > div > input:focus,
-    .stTextArea > div > div > textarea:focus {
-        border-color: #00ff4140 !important;
-        box-shadow: 0 0 10px rgba(0,255,65,0.08) !important;
-    }
-
-    /* ── Download button ──────────────────────────────────── */
-    .stDownloadButton > button {
-        background: #0d1117 !important;
-        color: #00ff41 !important;
-        border: 1px solid #1b2b1b !important;
-        border-radius: 10px !important;
-    }
-    .stDownloadButton > button:hover {
-        border-color: #00ff4150 !important;
-        box-shadow: 0 0 20px rgba(0,255,65,0.1) !important;
-    }
-
-    /* ── Misc ─────────────────────────────────────────────── */
-    .stProgress > div > div { border-radius: 10px; }
-    .stDataFrame { border-radius: 12px; overflow: hidden; }
-    hr { border-color: #1b2b1b !important; opacity: 0.5; }
-    code {
-        font-family: 'JetBrains Mono', monospace !important;
-        color: #00ff41 !important;
-        background: #0d1117 !important;
-    }
-
-    .stRadio > div { color: #c9d1d9; }
-    .streamlit-expanderHeader { color: #c9d1d9 !important; }
-
-    .stTabs [data-baseweb="tab-list"] { gap: 8px; }
-    .stTabs [data-baseweb="tab"] { color: #8b949e; border-radius: 8px; }
-    .stTabs [data-baseweb="tab"]:hover { color: #00ff41; }
-
-    /* ── Indicator results ────────────────────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       INDICATOR ROWS (Threat Indicators section)
+       ══════════════════════════════════════════════════════════ */
     .indicator-row {
         background: #0d1117;
         border: 1px solid #1b2b1b;
@@ -304,9 +566,11 @@ st.markdown("""
     .indicator-row.warning { border-left: 4px solid #d29922; }
     .indicator-row.safe    { border-left: 4px solid #00ff41; }
     .indicator-label { color: #8b949e; font-size: 0.82rem; }
-    .indicator-value { color: #c9d1d9; font-weight: 500; }
+    .indicator-value { color: #e6edf3; font-weight: 500; }
 
-    /* ── Stat display ─────────────────────────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       STAT DISPLAY
+       ══════════════════════════════════════════════════════════ */
     .stat-num {
         font-family: 'JetBrains Mono', monospace;
         font-size: 2.2rem; font-weight: 700;
@@ -314,34 +578,56 @@ st.markdown("""
         text-shadow: 0 0 20px rgba(0,255,65,0.2);
     }
     .stat-label {
-        color: #3d6b3d;
+        color: #58a558;
         font-size: 0.78rem;
         text-transform: uppercase;
         letter-spacing: 0.12em;
         margin-top: 2px;
     }
 
-    /* ── Section header ───────────────────────────────────── */
+    /* ══════════════════════════════════════════════════════════
+       SECTION HEADER
+       ══════════════════════════════════════════════════════════ */
     .section-hdr {
         display: flex; align-items: center; gap: 10px;
         margin-bottom: 18px;
     }
-    .section-hdr .icon {
-        font-size: 1.3rem;
-    }
+    .section-hdr .icon { font-size: 1.3rem; }
     .section-hdr .text {
-        color: #c9d1d9; font-size: 1.2rem; font-weight: 600;
+        color: #e6edf3; font-size: 1.2rem; font-weight: 600;
     }
     .section-hdr .line {
         flex: 1; height: 1px;
         background: linear-gradient(90deg, #1b2b1b 0%, transparent 100%);
     }
 
-    /* ── Alert overrides ──────────────────────────────────── */
-    [data-testid="stAlert"] {
-        border-radius: 10px !important;
-        background-color: #0d1117 !important;
+    /* ══════════════════════════════════════════════════════════
+       SCROLLBAR (for a polished look)
+       ══════════════════════════════════════════════════════════ */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #050a05; }
+    ::-webkit-scrollbar-thumb { background: #1b2b1b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2b3b2b; }
+
+    /* ══════════════════════════════════════════════════════════
+       MARKDOWN rendered inside st.markdown — make bold visible
+       ══════════════════════════════════════════════════════════ */
+    [data-testid="stMarkdownContainer"] p {
+        color: #c9d1d9;
     }
+    [data-testid="stMarkdownContainer"] strong {
+        color: #e6edf3;
+    }
+    [data-testid="stMarkdownContainer"] a {
+        color: #58a558;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       STREAMLIT NATIVE METRIC (st.metric)
+       ══════════════════════════════════════════════════════════ */
+    [data-testid="stMetric"] label { color: #58a558 !important; }
+    [data-testid="stMetric"] [data-testid="stMetricValue"] { color: #e6edf3 !important; }
+    [data-testid="stMetric"] [data-testid="stMetricDelta"] { color: #8b949e !important; }
 </style>
 """, unsafe_allow_html=True)
 
