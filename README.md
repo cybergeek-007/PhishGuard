@@ -235,7 +235,7 @@ phishguard/
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │                          INPUT LAYER                             │
-│         IMAP  ·  Gmail API  ·  .eml Upload  ·  Paste Headers    │
+│         IMAP  ·  Gmail API  ·  .eml Upload  ·  Paste Headers     │
 └──────────────────────────────┬───────────────────────────────────┘
                                │
 ┌──────────────────────────────▼───────────────────────────────────┐
@@ -247,10 +247,10 @@ phishguard/
 │                        ANALYSIS LAYER                            │
 │                                                                  │
 │  ┌─────────────────┐ ┌─────────────────┐ ┌────────────────────┐  │
-│  │ AUTH VALIDATOR   │ │ RELAY ANALYZER  │ │ THREAT INTEL       │  │
-│  │ Auth-Results +   │ │ ip-api.com geo  │ │ AbuseIPDB          │  │
-│  │ DNS fallback     │ │ hop tracing     │ │ Safe Browsing      │  │
-│  │ (SPF/DKIM/DMARC) │ │ anomaly detect  │ │ VirusTotal         │  │
+│  │ AUTH VALIDATOR  │ │ RELAY ANALYZER  │ │ THREAT INTEL       │  │
+│  │ Auth-Results +  │ │ ip-api.com geo  │ │ AbuseIPDB          │  │
+│  │ DNS fallback    │ │ hop tracing     │ │ Safe Browsing      │  │
+│  │ (SPF/DKIM/DMARC)│ │ anomaly detect  │ │ VirusTotal         │  │
 │  └─────────────────┘ └─────────────────┘ │ WHOIS              │  │
 │                                          └────────────────────┘  │
 │  ┌───────────────────────────────────────────────────────────┐   │
