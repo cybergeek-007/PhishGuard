@@ -605,7 +605,7 @@ def render_sidebar():
             '<p style="color:#8b949e;font-size:0.88rem;">Analyze a sample phishing email for demonstration</p>',
             unsafe_allow_html=True,
         )
-        if st.sidebar.button("🎯 Load Sample Phishing Email", width='stretch'):
+        if st.sidebar.button("🎯 Load Sample Phishing Email", use_container_width=True):
             email_data = create_sample_email()
             st.sidebar.success("✅ Sample loaded!")
 
@@ -613,7 +613,7 @@ def render_sidebar():
 
     # Analyze button
     st.sidebar.markdown('<div class="sidebar-section">', unsafe_allow_html=True)
-    if email_data and st.sidebar.button("⚡ Analyze Email", type="primary", width='stretch'):
+    if email_data and st.sidebar.button("⚡ Analyze Email", type="primary", use_container_width=True):
         with st.spinner("🔍 Scanning email security…"):
             result = st.session_state.analyzer.analyze_eml_bytes(email_data)
             if result:
@@ -628,7 +628,7 @@ def render_sidebar():
             else:
                 st.sidebar.error("❌ Failed to parse email")
 
-    if st.session_state.analysis_result and st.sidebar.button("🗑️ Clear Results", width='stretch'):
+    if st.session_state.analysis_result and st.sidebar.button("🗑️ Clear Results", use_container_width=True):
         st.session_state.analysis_result = None
         st.rerun()
     st.sidebar.markdown('</div>', unsafe_allow_html=True)
@@ -855,7 +855,7 @@ def render_relay_path(result):
         })
 
     df = pd.DataFrame(df_data)
-    st.dataframe(df, width='stretch', hide_index=True)
+    st.dataframe(df, use_container_width=True, hide_index=True)
 
     anomalies = result.get('relay_anomalies', [])
     if anomalies:
@@ -1047,7 +1047,7 @@ def render_export_options(result):
             data=json_report,
             file_name=f"phishguard_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
             mime="application/json",
-            width='stretch',
+            use_container_width=True,
         )
 
     with col2:
@@ -1057,7 +1057,7 @@ def render_export_options(result):
             data=text_report,
             file_name=f"phishguard_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt",
             mime="text/plain",
-            width='stretch',
+            use_container_width=True,
         )
 
 
