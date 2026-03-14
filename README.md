@@ -166,7 +166,7 @@ When you upload a `.eml`, PhishGuard **can't** replay the original SMTP session.
 ```
 INPUT: sender domain
    │
-   ├─ [1] Exact match against 106+ brands     → ✅ LEGIT
+   ├─ [1] Exact match against 106+ brands      → ✅ LEGIT
    ├─ [2] Subdomain of known brand             → ✅ LEGIT  (alerts.sbi.co.in)
    ├─ [3] Same org, different TLD + valid MX   → ✅ LEGIT
    ├─ [4] Levenshtein dist 1-3 + DNS verify    → 🔴 PHISH  (paypa1.com → paypal.com)
